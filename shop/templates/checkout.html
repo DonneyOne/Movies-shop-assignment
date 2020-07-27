@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<form id="form" method="POST">
+  Card number:<br>
+  <input type="text" required pattern="[0-9]{13,16}" >
+  <br>
+  CVV:<br>
+  <input type="text" required pattern="[0-9]{3}" >
+  <br><br>
+  Cardholder:<br>
+  <input type="text" required patter="^((?:[A-Za-z]+ ?){1,3})$" >
+  <br><br>
+  Expiry date:<br>
+  <input type="month" required >
+  <br><br>
+  <input formaction="{{url_for('done')}}" type="submit" value="Check out">
+  </form>
+
+{% endblock content %}

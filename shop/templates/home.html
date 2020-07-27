@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="sort">
+	<select onchange="location=this.value">
+	<option value="">--Please choose a sort--</option>
+	<option value="sortbyprice">Sort by price ( Lowest to Highest )</option>
+    <option value="sortbyprice2">Sort by price ( Highest to Lowest )</option>
+	</select>
+ </div>
+  {% for movie in movies %}
+  <div id="movie">
+  <a href="{{ url_for('movie', movie_id=movie.id) }}"><img src = "{{ url_for('static', filename='img/' + movie.image_file) }}"></a>
+    <a href="{{ url_for('movie', movie_id=movie.id) }}">
+
+      <p>"{{ movie.title }}" &nbsp </p></a>
+
+    <p>Price: {{ movie.price }}</p>
+   </div>
+  {% endfor %}
+<div id="footer">
+<p>Andon Gribachev - Cardiff University, Web applications coursework</p>
+</div> 
+{% endblock content %}

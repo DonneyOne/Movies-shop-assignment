@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<table class="">
+  <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
+
+  {% for key, value in display_wishlist.items() %}
+  <tr>
+    <!-- <td>{{ key }}</td> -->
+    <td>{{ value["title"] }}</td>
+    <td>{{ value["quantity"] }}</td>
+    <td>£{{ value["price"] }}</td>
+    <td>£{{ (value["quantity"] * value["price"]) }}</td>
+
+    <td>
+      <form action="{{ url_for('delete_wishlist', movie_id=key|int) }}">
+        <input class="" type="submit" value="Delete">
+      </form>
+      <form action="{{ url_for('add_to_cart', movie_id=key|int) }}">
+        <input class="" type="submit" value="Add to cart">
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+
+</table>
+<h3>Number of items: {{ total_quantity }} </h3>
+</form>
+
+{% endblock content %}

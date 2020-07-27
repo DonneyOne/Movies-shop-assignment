@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="movie_image">
+<img src = "{{ url_for('static', filename='img/' + movie.image_file) }}">
+</div>
+<div id="everything">
+<p>"{{ movie.title }}" &nbsp producer: {{ movie.producer.first_name }}&nbsp{{ movie.producer.last_name}}</p>
+<p>Price: {{ movie.price }} £</p>	
+<p>Description: {{movie.description}}</p>
+</br>
+{% if current_user.is_authenticated %}
+<a class="" href="/add_to_cart/{{movie.id}}">Add to Cart</a>
+<a class="" href="/add_to_wishlist/{{movie.id}}">Add to Wishlist</a>
+</br>
+</br>
+<form method="POST">
+{{ form.csrf_token }} 
+{{form.review}} {{form.submit}}
+</form>
+{% for review in reviews %}
+{% if review.item_id == movie.id %}
+<p> {{review.username}} : {{review.review}} </p>
+{% endif %}
+{% endfor %}
+{% else %}
+<p>Reviews left by the users: </p>
+{% for review in reviews %}
+{% if review.item_id == movie.id %}
+<p> {{review.username}} : {{review.review}} </p>
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
+{% endblock content %}
